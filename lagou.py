@@ -41,11 +41,18 @@ for m in range(int(page_NO)):
             position, region, time_o, Abbreviation, salary, experience, introduce, keys, welfare = 0,0,0,0,0,0,0,0,0
             pass
         driver.find_element_by_xpath (aa + '/div[1]/div[1]/div[1]/a/h3').click ()
+        windows = driver.window_handles
+        driver.switch_to.window (windows[-1])
+
         Duty = driver.find_element (By.CLASS_NAME, 'job-detail').text
+        driver.close ()
 
         writer = csv.writer (output)
         writer.writerow([position, region, time_o, Abbreviation, salary, experience, introduce, keys, welfare,Duty])
         print(position, region, time_o, Abbreviation, salary, experience, introduce, keys, welfare)
+
+        # 切换到当前窗口
+        driver.switch_to.window (driver.current_window_handle)
 
     down = driver.find_element_by_xpath('/html/body/div[5]/div/div[1]/div[2]/div[2]/p')
     driver.execute_script("arguments[0].scrollIntoView(false);", down)
