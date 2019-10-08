@@ -2,69 +2,89 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.options import Options
-import time, csv,random
+import time, csv, random
 from selenium.webdriver.common.by import By
 
 # 无头浏览器
-# options = Options()
-# options.headless = True
-# driver = webdriver.Firefox (options=options)
-driver = webdriver.Firefox()
-driver.implicitly_wait(15)
-driver.get("https://www.lagou.com/")
+options = Options()
+options.headless = True
+driver = webdriver.Firefox (options=options)
+# driver = webdriver.Firefox ()
+driver.implicitly_wait (30)
+driver.get ("https://www.lagou.com/")
 
 # 选择广州站
-driver.find_element_by_xpath('/html/body/div[9]/div[1]/div[2]/div[2]/div[1]/div/ul/li[4]/a').click()
+driver.find_element_by_xpath ('/html/body/div[9]/div[1]/div[2]/div[2]/div[1]/div/ul/li[4]/a').click ()
 # 输入关键词
-key = driver.find_element_by_xpath('//*[@id="search_input"]')
-key.clear()
-key.send_keys('python')
-key.send_keys(Keys.RETURN)
-page_NO = driver.find_element_by_xpath('/html/body/div[4]/div[2]/div[1]/div[3]/div[2]/div/span[5]').text
+key = driver.find_element_by_xpath ('//*[@id="search_input"]')
+key.clear ()
+key.send_keys ('java')
+key.send_keys (Keys.RETURN)
+page_NO = driver.find_element_by_xpath ('/html/body/div[4]/div[2]/div[1]/div[3]/div[2]/div/span[5]').text
 
-output = open('e:\data.csv', 'w', encoding='utf-8',newline='')
-for m in range(int(page_NO)):
-    print('第%d页数据爬取中' % (m + 1) + "--" * 10)
-    for i in range(15):
+# 关闭广告
+driver.find_element_by_xpath ('//*[@id="foot-fix-close"]').click ()
+# 获取当前窗口句柄
+lagou_handle = driver.current_window_handle
+output = open ('e:\data.csv', 'w', encoding='utf-8', newline='')
+for m in range (int (page_NO)):
+    print ('第%d页数据爬取中' % (m + 1) + "--" * 10)
+    for i in range (15):
         aa = '/html/body/div[4]/div[2]/div[1]/div[3]/ul/li[%d]' % (i + 1)
         try:
-            position = driver.find_element_by_xpath(aa + '/div[1]/div[1]/div[1]/a/h3').text
-            region = driver.find_element_by_xpath(aa + '/div[1]/div[1]/div[1]/a/span/em').text
-            time_o = driver.find_element_by_xpath(aa + '/div[1]/div[1]/div[1]/span').text
-            Abbreviation = driver.find_element_by_xpath(aa + '/div[1]/div[2]/div[1]/a').text
-            salary = driver.find_element_by_xpath(aa + '/div[1]/div[1]/div[2]/div/span').text
-            experience = driver.find_element_by_xpath(aa + '/div[1]/div[1]/div[2]/div').text
-            introduce = driver.find_element_by_xpath(aa + '/div[1]/div[2]/div[2]').text
-            keys = driver.find_element_by_xpath(aa + '/div[2]/div[1]').text
-            welfare = driver.find_element_by_xpath(aa + '/div[2]/div[2]').text
+            position = driver.find_element_by_xpath (aa + '/div[1]/div[1]/div[1]/a/h3').text
+            region = driver.find_element_by_xpath (aa + '/div[1]/div[1]/div[1]/a/span/em').text
+            time_o = driver.find_element_by_xpath (aa + '/div[1]/div[1]/div[1]/span').text
+            Abbreviation = driver.find_element_by_xpath (aa + '/div[1]/div[2]/div[1]/a').text
+            salary = driver.find_element_by_xpath (aa + '/div[1]/div[1]/div[2]/div/span').text
+            experience = driver.find_element_by_xpath (aa + '/div[1]/div[1]/div[2]/div').text
+            introduce = driver.find_element_by_xpath (aa + '/div[1]/div[2]/div[2]').text
+            keys = driver.find_element_by_xpath (aa + '/div[2]/div[1]').text
+            welfare = driver.find_element_by_xpath (aa + '/div[2]/div[2]').text
         except:
-            position, region, time_o, Abbreviation, salary, experience, introduce, keys, welfare = 0,0,0,0,0,0,0,0,0
+            time_o, Abbreviation, salary, experience, introduce, keys, welfare =  0, 0, 0, 0, 0, 0, 0
             pass
-        driver.find_element_by_xpath (aa + '/div[1]/div[1]/div[1]/a/h3').click ()
-        windows = driver.window_handles
-        driver.switch_to.window (windows[-1])
+
+        # 滚动到指定元素
+        new_page = driver.find_element_by_xpath (aa + '/div[1]/div[1]/div[1]/a/h3')
+        driver.execute_script ("arguments[0].scrollIntoView(false);", new_page)
+        new_page.click ()
+
+        # 获取所有窗口句柄
+        handles = driver.window_handles
+        # print (handles)
+
+        # 获取新窗口
+        new_handle = None
+        for handle in handles:
+            if handle != lagou_handle:
+                new_handle = handle
+
+        # 输出当前窗口句柄（
+        # print ('switch to ', handle)
+        driver.switch_to.window (new_handle)
 
         Duty = driver.find_element (By.CLASS_NAME, 'job-detail').text
+
+        time.sleep (random.randint (3, 5))
         driver.close ()
+        time.sleep (random.randint (1, 3))
+        # 切换回窗口
+        driver.switch_to.window (lagou_handle)
 
         writer = csv.writer (output)
-        writer.writerow([position, region, time_o, Abbreviation, salary, experience, introduce, keys, welfare,Duty])
-        print(position, region, time_o, Abbreviation, salary, experience, introduce, keys, welfare)
+        writer.writerow ([position, region, time_o, Abbreviation, salary, experience, introduce, keys, welfare, Duty])
+        print('第%d页,%d' % ((m + 1),i+1) + "--" * 10)
+        print (position, region, time_o, Abbreviation, salary, experience, introduce, keys, welfare, Duty)
 
-        # 切换到当前窗口
-        driver.switch_to.window (driver.current_window_handle)
-
-    down = driver.find_element_by_xpath('/html/body/div[5]/div/div[1]/div[2]/div[2]/p')
-    driver.execute_script("arguments[0].scrollIntoView(false);", down)
+    down = driver.find_element_by_xpath ('/html/body/div[5]/div/div[1]/div[2]/div[2]/p')
+    driver.execute_script ("arguments[0].scrollIntoView(false);", down)
     time.sleep (random.randint (3, 5))
-    driver.find_element(By.CLASS_NAME,'pager_next').click()
-
-output.close()
-driver.close()
-driver.quit()
+    driver.find_element (By.CLASS_NAME, 'pager_next').click ()
 
 
-
+driver.close ()
+driver.quit ()
 
 ##################################################################################################
 # elem_user = driver.find_element_by_name("userid")
