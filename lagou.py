@@ -14,11 +14,20 @@ driver.implicitly_wait (30)
 driver.get ("https://www.lagou.com/")
 
 # 选择广州站
-driver.find_element_by_xpath ('/html/body/div[9]/div[1]/div[2]/div[2]/div[1]/div/ul/li[4]/a').click ()
+# driver.find_element_by_xpath ('/html/body/div[9]/div[1]/div[2]/div[2]/div[1]/div/ul/li[4]/a').click ()
+cty = '广州站'
+cty1 = driver.find_element_by_xpath ('/html/body/div[9]/div[1]/div[2]/div[2]/div[1]/div/p[1]/a')
+cty2 = driver.find_element_by_xpath ('/html/body/div[9]/div[1]/div[2]/div[2]/div[1]/div/ul/li[4]/a')
+
+if cty1.text == cty:
+    cty1.click()
+elif cty2.text == cty:
+    cty2.click()
+
 # 输入关键词
 key = driver.find_element_by_xpath ('//*[@id="search_input"]')
 key.clear ()
-key.send_keys ('java')
+key.send_keys ('go')
 key.send_keys (Keys.RETURN)
 page_NO = driver.find_element_by_xpath ('/html/body/div[4]/div[2]/div[1]/div[3]/div[2]/div/span[5]').text
 
