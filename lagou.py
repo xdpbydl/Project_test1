@@ -5,6 +5,7 @@ from selenium.webdriver.firefox.options import Options
 import time, csv, random
 from selenium.webdriver.common.by import By
 
+
 # 无头浏览器
 options = Options()
 options.headless = True
