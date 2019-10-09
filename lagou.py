@@ -93,7 +93,7 @@ for m in range (int (page_NO)):
     driver.find_element (By.CLASS_NAME, 'pager_next').click ()
 
 
-driver.close ()
+# driver.close ()
 driver.quit ()
 
 ##################################################################################################
