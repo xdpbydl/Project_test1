@@ -27,15 +27,19 @@ elif cty2.text == cty:
 # 输入关键词
 key = driver.find_element_by_xpath ('//*[@id="search_input"]')
 key.clear ()
-key.send_keys ('python')
+key.send_keys ('产品经理/项目经理')
 key.send_keys (Keys.RETURN)
 page_NO = driver.find_element_by_xpath ('/html/body/div[4]/div[2]/div[1]/div[3]/div[2]/div/span[5]').text
 
 # 关闭广告
-driver.find_element_by_xpath ('//*[@id="foot-fix-close"]').click ()
+try:
+    driver.find_element_by_xpath ('//*[@id="foot-fix-close"]').click ()
+except:
+    print("无广告…………")
+    pass
 # 获取当前窗口句柄
 lagou_handle = driver.current_window_handle
-output = open ('e:\data.csv', 'w', encoding='utf-8', newline='')
+output = open ('e:\data.csv', 'w', encoding='utf-8-sig', newline='')
 for m in range (int (page_NO)):
     print ('第%d页数据爬取中' % (m + 1) + "--" * 10)
     for i in range (15):
