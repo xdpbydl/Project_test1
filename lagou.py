@@ -27,7 +27,7 @@ elif cty2.text == cty:
 # 输入关键词
 key = driver.find_element_by_xpath ('//*[@id="search_input"]')
 key.clear ()
-key.send_keys ('go')
+key.send_keys ('python')
 key.send_keys (Keys.RETURN)
 page_NO = driver.find_element_by_xpath ('/html/body/div[4]/div[2]/div[1]/div[3]/div[2]/div/span[5]').text
 
@@ -54,7 +54,8 @@ for m in range (int (page_NO)):
             time_o, Abbreviation, salary, experience, introduce, keys, welfare =  0, 0, 0, 0, 0, 0, 0
             pass
 
-        # 滚动到指定元素
+        # # 滚动到指定元素
+        time.sleep(1)
         new_page = driver.find_element_by_xpath (aa + '/div[1]/div[1]/div[1]/a/h3')
         driver.execute_script ("arguments[0].scrollIntoView(false);", new_page)
         new_page.click ()
