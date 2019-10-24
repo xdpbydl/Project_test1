@@ -1,7 +1,6 @@
-a =1
-try :
-    a = 2
-    b =0
-    c = a/b
-except:
-    print(a)
+import copy
+a = (1,2,3)
+b = copy.copy(a)
+c = copy.deepcopy(a)
+
+print(id(a),id(),id(c))
