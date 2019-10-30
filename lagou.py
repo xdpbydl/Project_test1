@@ -14,10 +14,10 @@ driver.implicitly_wait (30)
 driver.get ("https://www.lagou.com/")
 
 # 选择广州站
-# driver.find_element_by_xpath ('/html/body/div[9]/div[1]/div[2]/div[2]/div[1]/div/ul/li[4]/a').click ()
+# driver.find_element_by_xpath ('/html/body/div[10]/div[1]/div[2]/div[2]/div[1]/div/ul/li[4]/a').click ()
 cty = '广州站'
-cty1 = driver.find_element_by_xpath ('/html/body/div[9]/div[1]/div[2]/div[2]/div[1]/div/p[1]/a')
-cty2 = driver.find_element_by_xpath ('/html/body/div[9]/div[1]/div[2]/div[2]/div[1]/div/ul/li[4]/a')
+cty1 = driver.find_element_by_xpath ('/html/body/div[10]/div[1]/div[2]/div[2]/div[1]/div/p[1]/a')
+cty2 = driver.find_element_by_xpath ('/html/body/div[10]/div[1]/div[2]/div[2]/div[1]/div/ul/li[4]/a')
 
 if cty1.text == cty:
     cty1.click()
@@ -27,9 +27,9 @@ elif cty2.text == cty:
 # 输入关键词
 key = driver.find_element_by_xpath ('//*[@id="search_input"]')
 key.clear ()
-key.send_keys ('产品经理/项目经理')
+key.send_keys ('JAVA高级')
 key.send_keys (Keys.RETURN)
-page_NO = driver.find_element_by_xpath ('/html/body/div[4]/div[2]/div[1]/div[3]/div[2]/div/span[5]').text
+page_NO = driver.find_element_by_xpath ('/html/body/div[5]/div[2]/div[1]/div[3]/div[2]/div/span[5]').text
 
 # 关闭广告
 try:
@@ -43,7 +43,7 @@ output = open ('e:\data.csv', 'w', encoding='utf-8-sig', newline='')
 for m in range (int (page_NO)):
     print ('第%d页数据爬取中' % (m + 1) + "--" * 10)
     for i in range (15):
-        aa = '/html/body/div[4]/div[2]/div[1]/div[3]/ul/li[%d]' % (i + 1)
+        aa = '/html/body/div[5]/div[2]/div[1]/div[3]/ul/li[%d]' % (i + 1)
         try:
             position = driver.find_element_by_xpath (aa + '/div[1]/div[1]/div[1]/a/h3').text
             region = driver.find_element_by_xpath (aa + '/div[1]/div[1]/div[1]/a/span/em').text
