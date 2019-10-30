@@ -6,7 +6,7 @@ import time, csv, random
 from selenium.webdriver.common.by import By
 
 # 无头浏览器
-options = Options()
+options = Options ()
 options.headless = True
 driver = webdriver.Firefox (options=options)
 # driver = webdriver.Firefox ()
@@ -20,9 +20,9 @@ cty1 = driver.find_element_by_xpath ('/html/body/div[10]/div[1]/div[2]/div[2]/di
 cty2 = driver.find_element_by_xpath ('/html/body/div[10]/div[1]/div[2]/div[2]/div[1]/div/ul/li[4]/a')
 
 if cty1.text == cty:
-    cty1.click()
+    cty1.click ()
 elif cty2.text == cty:
-    cty2.click()
+    cty2.click ()
 
 # 输入关键词
 key = driver.find_element_by_xpath ('//*[@id="search_input"]')
@@ -55,11 +55,11 @@ for m in range (int (page_NO)):
             keys = driver.find_element_by_xpath (aa + '/div[2]/div[1]').text
             welfare = driver.find_element_by_xpath (aa + '/div[2]/div[2]').text
         except:
-            time_o, Abbreviation, salary, experience, introduce, keys, welfare =  0, 0, 0, 0, 0, 0, 0
+            time_o, Abbreviation, salary, experience, introduce, keys, welfare = 0, 0, 0, 0, 0, 0, 0
             pass
 
         # # 滚动到指定元素
-        time.sleep(1)
+        time.sleep (1)
         new_page = driver.find_element_by_xpath (aa + '/div[1]/div[1]/div[1]/a/h3')
         driver.execute_script ("arguments[0].scrollIntoView(false);", new_page)
         new_page.click ()
@@ -88,14 +88,13 @@ for m in range (int (page_NO)):
 
         writer = csv.writer (output)
         writer.writerow ([position, region, time_o, Abbreviation, salary, experience, introduce, keys, welfare, Duty])
-        print('第%d页,%d' % ((m + 1),i+1) + "--" * 10)
+        print('第%d页,%d' % ((m + 1), i + 1) + "--" * 10)
         print (position, region, time_o, Abbreviation, salary, experience, introduce, keys, welfare, Duty)
 
     down = driver.find_element_by_xpath ('/html/body/div[6]/div/div[1]/div[2]/div[2]/p')
     driver.execute_script ("arguments[0].scrollIntoView(false);", down)
     time.sleep (random.randint (3, 5))
     driver.find_element (By.CLASS_NAME, 'pager_next').click ()
-
 
 # driver.close ()
 driver.quit ()
