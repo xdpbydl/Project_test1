@@ -91,7 +91,7 @@ for m in range (int (page_NO)):
         print('第%d页,%d' % ((m + 1),i+1) + "--" * 10)
         print (position, region, time_o, Abbreviation, salary, experience, introduce, keys, welfare, Duty)
 
-    down = driver.find_element_by_xpath ('/html/body/div[5]/div/div[1]/div[2]/div[2]/p')
+    down = driver.find_element_by_xpath ('/html/body/div[6]/div/div[1]/div[2]/div[2]/p')
     driver.execute_script ("arguments[0].scrollIntoView(false);", down)
     time.sleep (random.randint (3, 5))
     driver.find_element (By.CLASS_NAME, 'pager_next').click ()
