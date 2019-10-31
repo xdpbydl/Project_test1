@@ -6,10 +6,11 @@ import time, csv, random
 from selenium.webdriver.common.by import By
 
 # 无头浏览器
-options = Options ()
-options.headless = True
-driver = webdriver.Firefox (options=options)
-# driver = webdriver.Firefox ()
+# options = Options ()
+# options.headless = True
+# driver = webdriver.Firefox (options=options)
+driver = webdriver.Firefox ()
+# driver = webdriver.Ie()
 driver.implicitly_wait (30)
 driver.get ("https://www.lagou.com/")
 
