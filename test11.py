@@ -46,5 +46,7 @@ cookies = driver.get_cookies ()
 # print(cookies) #ie下存在问题
 driver.find_element_by_css_selector('#TreeView1n1 > img:nth-child(1)').click()
 driver.find_element_by_css_selector('#TreeView1t3').click()     #合同发起
-driver.find_element_by_css_selector('#btnAdd').click()      #添加
+driver.switch_to_frame ('mainFrame')
+# driver.find_element_by_css_selector('#btnAdd').click()      #添加
+driver.find_element_by_xpath("/html/body/form/div[5]/div[2]/table/tbody/tr/td/span/input[1]").click()
 print("#"*15)
