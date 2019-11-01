@@ -6,10 +6,10 @@ import time, csv, random
 from selenium.webdriver.common.by import By
 
 # 无头浏览器
-# options = Options ()
-# options.headless = True
-# driver = webdriver.Firefox (options=options)
-driver = webdriver.Firefox ()
+options = Options ()
+options.headless = True
+driver = webdriver.Firefox (options=options)
+# driver = webdriver.Firefox ()
 # driver = webdriver.Ie()
 driver.implicitly_wait (30)
 driver.get ("https://www.lagou.com/")
@@ -28,7 +28,7 @@ elif cty2.text == cty:
 # 输入关键词
 key = driver.find_element_by_xpath ('//*[@id="search_input"]')
 key.clear ()
-key.send_keys ('JAVA高级')
+key.send_keys ('自动化测试')
 key.send_keys (Keys.RETURN)
 page_NO = driver.find_element_by_xpath ('/html/body/div[5]/div[2]/div[1]/div[3]/div[2]/div/span[5]').text
 

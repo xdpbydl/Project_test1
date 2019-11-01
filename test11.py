@@ -10,8 +10,8 @@ import time as t
 # options = Options ()
 # options.headless = True
 # driver = webdriver.Firefox (options=options)
-driver = webdriver.Firefox ()
-# driver = webdriver.Ie()
+# driver = webdriver.Firefox ()
+driver = webdriver.Ie()
 driver.implicitly_wait (20)
 driver.get ("http://127.0.0.1/grwl/Login.aspx")
 driver.maximize_window ()
