@@ -1,0 +1,17 @@
+import time
+# data = time.asctime()
+# print(data)
+# data = time.ctime()
+# print(data)
+# # data1 = time.clock()
+# # print(data1)
+# data2 = time.gmtime()
+# print(data2)
+data3 = time.localtime()
+data = '%d-%d-%d' % (data3.tm_year, data3.tm_mon, data3.tm_mday)
+print(data)
+# data4 = time.mktime()
+# # print(data4)
+# data5 = time.strftime(tm_year, tm_mon, tm_mday)
+
+# print(data5)

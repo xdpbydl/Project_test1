@@ -1,13 +1,8 @@
-import requests
-from requests.exceptions import ReadTimeout,ConnectionError,RequestException
+import copy
+a = (1,2,3,[3,34,4])
+b = copy.copy(a)
+c = copy.deepcopy(a)
 
-try:
-    response = requests.get('http://httpbin.org/get', timeout=0.5)
-    print(response.status_code)
-except ReadTimeout:
-    print("Time out")
-except ConnectionError:
-    print("connect error")
-except RequestException:
-    print("Error")
-
+print(id(a))
+print(id(b))
+print(id(c))    # a为不可变数据类型，两者都为指向、引用， 为可变时，c 改变为重新指向一个地址空间。

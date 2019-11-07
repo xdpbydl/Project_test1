@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../Germey-ProxyPool/.idea/Germey-ProxyPool.iml" filepath="$PROJECT_DIR$/../Germey-ProxyPool/.idea/Germey-ProxyPool.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Project_test1.iml" filepath="$PROJECT_DIR$/.idea/Project_test1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ProxyPool/.idea/ProxyPool.iml" filepath="$PROJECT_DIR$/../ProxyPool/.idea/ProxyPool.iml" />
     </modules>
   </component>
 </project>

@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.select import Select
 from selenium.webdriver.firefox.options import Options
 import time, csv, random
 from selenium.webdriver.common.by import By
 import time as t
-
+data3 = time.localtime()
+data = '%d-%d-%d' % (data3.tm_year, data3.tm_mon, data3.tm_mday)
 # 无头浏览器
 # options = Options ()
 # options.headless = True
 # driver = webdriver.Firefox (options=options)
-driver = webdriver.Firefox ()
-# driver = webdriver.Ie()
+# driver = webdriver.Firefox ()
+driver = webdriver.Ie()
 driver.implicitly_wait (20)
 driver.get ("http://127.0.0.1/grwl/Login.aspx")
 driver.maximize_window ()
@@ -45,8 +47,18 @@ t.sleep(3)
 cookies = driver.get_cookies ()
 # print(cookies) #ie下存在问题
 driver.find_element_by_css_selector('#TreeView1n1 > img:nth-child(1)').click()
-driver.find_element_by_css_selector('#TreeView1t3').click()     #合同发起
-driver.switch_to_frame ('mainFrame')
-# driver.find_element_by_css_selector('#btnAdd').click()      #添加
-driver.find_element_by_xpath("/html/body/form/div[5]/div[2]/table/tbody/tr/td/span/input[1]").click()
+driver.find_element_by_css_selector('#TreeView1t3').click()     # 合同发起
+driver.switch_to.frame('main_body')
+driver.find_element_by_css_selector('#btnAdd').click()      # 添加
+
+sel_1 = driver.find_element_by_xpath('//*[@id="searchcn10291"]')
+Select(sel_1).select_by_index(5)  # 选择总部合同
+sel_2 = driver.find_element_by_xpath('//*[@id="searchcn10270"]')
+Select(sel_2).select_by_index(9)  # 选择合同模板
+sel_3 = driver.find_element_by_xpath('//*[@id="searchcn10272"]')
+sel_3.send_keys(data + "test1")    # 填写合同名称
+
+sel_1 = driver.find_element_by_xpath('//*[@id="searchcn10273"]')
+Select(sel_1).select_by_index(5)  # 选择合同类型
+
 print("#"*15)
