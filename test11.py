@@ -5,6 +5,7 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.firefox.options import Options
 import time, csv, random
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
 import time as t
 data3 = time.localtime()
 data = '%d-%d-%d' % (data3.tm_year, data3.tm_mon, data3.tm_mday)
@@ -44,9 +45,14 @@ time.sleep(0.3)
 driver.find_element_by_xpath('//*[@id="imgbtnLogin"]').click()
 
 t.sleep(3)
-cookies = driver.get_cookies ()
+# cookies = driver.get_cookies ()
 # print(cookies) #ie下存在问题
-driver.find_element_by_css_selector('#TreeView1n1 > img:nth-child(1)').click()
+# driver.find_element_by_xpath('//*[@id="TreeView1t1"] and @title="合同发起"]').click()
+# driver.find_element_by_css_selector('#TreeView1n1 > img:nth-child(1)').click()
+ActionChains(driver).move_by_offset(38, 168).click().perform()
+#
+# print("!"*15)
+t.sleep(1)
 driver.find_element_by_css_selector('#TreeView1t3').click()     # 合同发起
 driver.switch_to.frame('main_body')
 driver.find_element_by_css_selector('#btnAdd').click()      # 添加
@@ -56,7 +62,7 @@ Select(sel_1).select_by_index(5)  # 选择总部合同
 sel_2 = driver.find_element_by_xpath('//*[@id="searchcn10270"]')
 Select(sel_2).select_by_index(9)  # 选择合同模板
 sel_3 = driver.find_element_by_xpath('//*[@id="searchcn10272"]')
-sel_3.send_keys(data + "test1")    # 填写合同名称
+sel_3.send_keys(data + "__test1")    # 填写合同名称
 
 sel_1 = driver.find_element_by_xpath('//*[@id="searchcn10273"]')
 Select(sel_1).select_by_index(5)  # 选择合同类型
