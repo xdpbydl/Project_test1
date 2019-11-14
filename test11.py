@@ -13,8 +13,8 @@ data = '%d-%d-%d' % (data3.tm_year, data3.tm_mon, data3.tm_mday)
 # options = Options ()
 # options.headless = True
 # driver = webdriver.Firefox (options=options)
-# driver = webdriver.Firefox ()
-driver = webdriver.Ie()
+driver = webdriver.Firefox ()
+# driver = webdriver.Ie()
 driver.implicitly_wait (20)
 driver.get ("http://127.0.0.1/grwl/Login.aspx")
 driver.maximize_window ()
@@ -49,7 +49,9 @@ t.sleep(3)
 # print(cookies) #ie下存在问题
 # driver.find_element_by_xpath('//*[@id="TreeView1t1"] and @title="合同发起"]').click()
 # driver.find_element_by_css_selector('#TreeView1n1 > img:nth-child(1)').click()
-ActionChains(driver).move_by_offset(38, 168).click().perform()
+
+# ActionChains(driver).move_by_offset(38, 168).click().perform()
+driver.find_element_by_xpath('//*[@id="TreeView1t1"] and @title="合同发起"]').click()
 #
 # print("!"*15)
 t.sleep(1)
