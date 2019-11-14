@@ -1,17 +1,11 @@
+# coding=utf-8
+from selenium import webdriver
 import time
-# data = time.asctime()
-# print(data)
-# data = time.ctime()
-# print(data)
-# # data1 = time.clock()
-# # print(data1)
-# data2 = time.gmtime()
-# print(data2)
-data3 = time.localtime()
-data = '%d-%d-%d' % (data3.tm_year, data3.tm_mon, data3.tm_mday)
-print(data)
-# data4 = time.mktime()
-# # print(data4)
-# data5 = time.strftime(tm_year, tm_mon, tm_mday)
 
-# print(data5)
+driver = webdriver.Ie()
+driver.get("http://www.baidu.com")
+time.sleep(0.5)
+
+driver.find_element_by_id("kw").send_keys("Selenium2")
+#driver.find_element_by_name("wd").send_keys("Selenium2")
+driver.find_element_by_id("su").click()
