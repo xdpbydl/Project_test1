@@ -95,13 +95,24 @@ driver.find_element_by_id('searchcn10274img').send_keys(Keys.ENTER)
 # # 输出当前窗口句柄（
 # # print ('switch to ', handle)
 # driver.switch_to.window(new_handle)
-driver.switch_to.frame('form1')
+# driver.switch_to.alert()
+t.sleep(1)
+aa = driver.switch_to.active_element
+actions = ActionChains(driver)
+actions.send_keys(Keys.TAB).move_to_element().context_click().perform()
+# actions.send_keys(*Keys.ENTER)
+actions.sendKeys(Keys.NULL)
+t.sleep(1)
+#
+# try:
+#     bb = driver.find_element_by_id('xgvData_DXDataRow0')
+#     print(bb)
+#
+# except:
+#     print("未执行1" * 15)
 try:
-    driver.find_element_by_id('xgvData_DXDataRow0').send_keys(Keys.ENTER)
-except:
-    print("未执行1" * 15)
-try:
-    driver.find_element_by_id('btnSearchSelect').send_keys(Keys.ENTER)
+    t = driver.find_element_by_id('btnSearchSelect')
+    print(t)
 except:
     print("未执行2" * 15)
 
