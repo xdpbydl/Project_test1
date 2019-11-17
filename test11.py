@@ -83,7 +83,8 @@ Select(sel_1).select_by_index(5)  # 选择合同类型
 
 # 选择缔约方
 
-driver.find_element_by_id('searchcn10274img').send_keys(Keys.ENTER)
+aa = driver.find_element_by_id('searchcn10274img')
+aa.send_keys(Keys.ENTER)
 # handles = driver.window_handles
 # print(handle, handles)
 # # 获取新窗口
@@ -97,11 +98,19 @@ driver.find_element_by_id('searchcn10274img').send_keys(Keys.ENTER)
 # driver.switch_to.window(new_handle)
 # driver.switch_to.alert()
 t.sleep(1)
-aa = driver.switch_to.active_element
-actions = ActionChains(driver)
-actions.send_keys(Keys.TAB).move_to_element().context_click().perform()
+# aa = driver.switch_to.active_element
+# actions = ActionChains(driver)
+
+
+
+aa.send_keys(Keys.TAB)
+aa.accept()
+aa.send_keys(Keys.ENTER)
+aa.send_keys(Keys.ENTER)
+t.sleep(1)
+driver.send_keys(Keys.SPACE)
 # actions.send_keys(*Keys.ENTER)
-actions.sendKeys(Keys.NULL)
+# actions.sendKeys(Keys.NULL)
 t.sleep(1)
 #
 # try:
@@ -111,7 +120,7 @@ t.sleep(1)
 # except:
 #     print("未执行1" * 15)
 try:
-    t = driver.find_element_by_id('btnSearchSelect')
+    t = aa.find_element_by_id('btnSearchSelect')
     print(t)
 except:
     print("未执行2" * 15)
