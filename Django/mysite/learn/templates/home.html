@@ -1,0 +1,11 @@
+{% for item in List %}
+    {{ item }}{% if not forloop.last %},{% endif %}
+{% endfor %}
+
+<ul>
+{% for athlete in athlete_list %}
+    <li>{{ athlete.name }}</li>
+{% empty %}
+    <li>抱歉，列表为空</li>
+{% endfor %}
+</ul>
